@@ -16,6 +16,8 @@ public class PlayerStats : LifetimeMonoBehaviour
         Speed = playerSetting.speed;
         Damage = playerSetting.damagePerSecond;
         AttackRadius = playerSetting.attackRadius;
+        
+        playerSetting.NormalizeProbabilities();
     }
     
     // Методы для прокачки героя
@@ -36,21 +38,21 @@ public class PlayerStats : LifetimeMonoBehaviour
     
     public void RandomUpgrade()
     {
-        float randomValue = Random.value; // Случайное число от 0 до 1
+        float randomValue = Random.value;
 
-        if (randomValue <= 0.60f)
+        if (randomValue <= playerSetting.speedUpgradeProbability)
         {
-            UpgradeSpeed(0.5f); // Прокачка скорости
+            UpgradeSpeed(playerSetting.speedStep);
             Debug.Log("Speed upgraded!");
         }
-        else if (randomValue <= 0.90f)
+        else if (randomValue <= playerSetting.speedUpgradeProbability + playerSetting.damageUpgradeProbability)
         {
-            UpgradeDamage(10f); // Прокачка урона
+            UpgradeDamage(playerSetting.damageStep);
             Debug.Log("Damage upgraded!");
         }
         else
         {
-            UpgradeAttackRadius(1f); // Прокачка радиуса атаки
+            UpgradeAttackRadius(playerSetting.radiusStep);
             Debug.Log("Attack radius upgraded!");
         }
     }

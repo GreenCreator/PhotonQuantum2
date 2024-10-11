@@ -15,3 +15,9 @@ MonoBehaviour:
   speed: 1
   damagePerSecond: 10
   attackRadius: 2
+  speedStep: 0.5
+  damageStep: 10
+  radiusStep: 1
+  speedUpgradeProbability: 0.6
+  damageUpgradeProbability: 0.3
+  attackRadiusUpgradeProbability: 0.1
