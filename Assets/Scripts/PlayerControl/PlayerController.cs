@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviourPun
 {
-    [Header("Movement Settings")]
-    [SerializeField] private float rotationSpeed = 720f; 
-    [SerializeField] private float mouseSensitivity = 100f; 
-    [SerializeField] private float cameraDistance = 5f; 
-    [SerializeField] private float cameraHeight = 2f; 
+    [Header("Movement Settings")] [SerializeField]
+    private float rotationSpeed = 720f;
 
-    private Transform cameraTransform; 
+    [SerializeField] private float mouseSensitivity = 100f;
+    [SerializeField] private float cameraDistance = 5f;
+    [SerializeField] private float cameraHeight = 2f;
+
+    private PlayerStats playerStats;
+    private Transform cameraTransform;
     private float pitch;
     private float yaw;
     private Rigidbody rb;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviourPun
 
     void Start()
     {
+        playerStats = GetComponent<PlayerStats>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
@@ -73,7 +76,8 @@ public class PlayerController : MonoBehaviourPun
 
         if (moveDirection.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg +
+                                cameraTransform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref rotationSpeed, 0.1f);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;

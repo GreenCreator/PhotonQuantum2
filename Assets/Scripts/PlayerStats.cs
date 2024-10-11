@@ -8,6 +8,16 @@ public class PlayerStats : LifetimeMonoBehaviour
     [Atom] public float Damage { get; set; } = 10f;
     [Atom] public float AttackRadius { get; set; } = 3f;
 
+    [Header("Player Setting")] 
+    [SerializeField] private PlayerSetting playerSetting;
+    protected void Awake()
+    {
+        // Инициализация реактивных свойств из ScriptableObject
+        Speed = playerSetting.speed;
+        Damage = playerSetting.damagePerSecond;
+        AttackRadius = playerSetting.attackRadius;
+    }
+    
     // Методы для прокачки героя
     private void UpgradeSpeed(float value)
     {

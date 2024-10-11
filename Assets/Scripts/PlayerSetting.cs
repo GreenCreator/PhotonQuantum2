@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerSetting", menuName = "Game/Player Setting")]
+[CreateAssetMenu(fileName = "PlayerSetting", menuName = "ScriptableObjects/PlayerSetting", order = 1)]
 public class PlayerSetting : ScriptableObject
 {
     public float speed;
